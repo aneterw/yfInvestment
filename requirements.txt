@@ -1,0 +1,36 @@
+# FastHML 桌面應用框架
+fasthml>=0.1.0
+
+# 金融數據獲取
+yfinance>=0.2.40
+
+# 數據處理
+pandas>=2.1.0
+numpy>=1.24.0
+
+# 圖表繪製
+plotly>=5.17.0
+kaleido>=0.2.1
+
+# 報表匯出
+openpyxl>=3.1.0
+reportlab>=4.0.0
+fpdf2>=2.7.0
+
+# 日期時間處理
+python-dateutil>=2.8.0
+
+# 配置管理
+pyyaml>=6.0.0
+
+# 日誌
+loguru>=0.7.0
+
+# 打包工具
+pyinstaller>=6.0.0
+
+# 開發依賴
+pytest>=7.4.0
+pytest-cov>=4.1.0
+black>=23.0.0
+flake8>=6.0.0

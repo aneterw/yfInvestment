@@ -1,0 +1,109 @@
+# 應用配置
+app:
+  name: "投資績效分析軟體"
+  version: "1.0.0"
+  window:
+    width: 1550
+    height: 1000
+    min_width: 1200
+    min_height: 800
+    title: "投資績效分析軟體 v1.0.0"
+  theme:
+    default: "dark"
+    available: ["light", "dark"]
+
+# 數據配置
+data:
+  cache_dir: "data_cache"
+  cache_ttl_hours: 24
+  max_retries: 3
+  timeout_seconds: 30
+  update_interval_minutes: 60
+
+  # 支援的市場類型
+  markets:
+    - "TW"   # 台股
+    - "US"   # 美股
+    - "HK"   # 港股
+    - "CN"   # A股
+    - "INDEX" # 指數
+    - "COMMODITY" # 大宗商品
+
+# 投資組合配置
+portfolio:
+  max_portfolios: 8
+  default_currency: "TWD"
+  supported_currencies: ["TWD", "USD", "CNY", "HKD", "JPY"]
+
+  # 手續費預設值
+  default_buy_fee_rate: 0.001425  # 0.1425%
+  default_sell_fee_rate: 0.001425  # 0.1425%
+  default_tax_rate: 0.003  # 0.3%
+
+# 基準指標配置
+benchmark:
+  default: "^TWII"  # 台股加權指數
+  options:
+    - "^TWII"   # 台股加權指數
+    - "^GSPC"   # S&P 500
+    - "^IXIC"   # 納斯達克
+    - "^HSI"    # 恆生指數
+    - "000001.SS" # 上證指數
+    - "SPY"     # 標普500 ETF
+    - "QQQ"     # 納斯達克100 ETF
+
+# 圖表配置
+charts:
+  theme:
+    dark:
+      bg_color: "#1e1e1e"
+      grid_color: "#333333"
+      text_color: "#e0e0e0"
+      up_color: "#ff4444"    # 紅漲
+      down_color: "#00cc00"  # 綠跌
+      volume_up: "rgba(255, 68, 68, 0.5)"
+      volume_down: "rgba(0, 204, 0, 0.5)"
+    light:
+      bg_color: "#ffffff"
+      grid_color: "#e0e0e0"
+      text_color: "#333333"
+      up_color: "#ff4444"
+      down_color: "#00cc00"
+      volume_up: "rgba(255, 68, 68, 0.5)"
+      volume_down: "rgba(0, 204, 0, 0.5)"
+
+  default_period: "1y"
+  available_periods: ["1d", "5d", "1mo", "3mo", "6mo", "1y", "2y", "5y", "max"]
+  available_intervals: ["1d", "1wk", "1mo"]
+
+# 匯率配置
+exchange_rates:
+  base: "USD"
+  pairs:
+    - "USDTWD"  # 美元兌台幣
+    - "USDCNY"  # 美元兌人民幣
+    - "USDHKD"  # 美元兌港幣
+    - "USDJPY"  # 美元兌日圓
+  update_interval_hours: 6
+
+# 日誌配置
+logging:
+  level: "INFO"
+  file: "logs/app.log"
+  rotation: "10 MB"
+  retention: "30 days"
+  format: "{time:YYYY-MM-DD HH:mm:ss} | {level} | {module}:{function}:{line} | {message}"
+
+# 匯出配置
+export:
+  output_dir: "exports"
+  formats: ["pdf", "excel", "png"]
+  pdf:
+    page_size: "A4"
+    margin: 20
+  excel:
+    include_charts: true
+  png:
+    width: 1200
+    height: 800
+    scale: 2

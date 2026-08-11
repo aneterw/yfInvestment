@@ -1,0 +1,302 @@
+[
+  {
+    "symbol": "^TWII",
+    "name": "台股加權指數",
+    "category": "INDEX",
+    "currency": "TWD"
+  },
+  {
+    "symbol": "2330.TW",
+    "name": "台積電",
+    "category": "STOCK",
+    "currency": "TWD"
+  },
+  {
+    "symbol": "2317.TW",
+    "name": "鴻海",
+    "category": "STOCK",
+    "currency": "TWD"
+  },
+  {
+    "symbol": "2454.TW",
+    "name": "聯發科",
+    "category": "STOCK",
+    "currency": "TWD"
+  },
+  {
+    "symbol": "1301.TW",
+    "name": "台塑",
+    "category": "STOCK",
+    "currency": "TWD"
+  },
+  {
+    "symbol": "2881.TW",
+    "name": "富邦金",
+    "category": "STOCK",
+    "currency": "TWD"
+  },
+  {
+    "symbol": "2882.TW",
+    "name": "國泰金",
+    "category": "STOCK",
+    "currency": "TWD"
+  },
+  {
+    "symbol": "2412.TW",
+    "name": "中華電",
+    "category": "STOCK",
+    "currency": "TWD"
+  },
+  {
+    "symbol": "3008.TW",
+    "name": "大立光",
+    "category": "STOCK",
+    "currency": "TWD"
+  },
+  {
+    "symbol": "2303.TW",
+    "name": "聯電",
+    "category": "STOCK",
+    "currency": "TWD"
+  },
+  {
+    "symbol": "3711.TW",
+    "name": "日月光投控",
+    "category": "STOCK",
+    "currency": "TWD"
+  },
+  {
+    "symbol": "0050.TW",
+    "name": "元大台灣50",
+    "category": "ETF",
+    "currency": "TWD"
+  },
+  {
+    "symbol": "0056.TW",
+    "name": "元大高股息",
+    "category": "ETF",
+    "currency": "TWD"
+  },
+  {
+    "symbol": "00878.TW",
+    "name": "國泰永續高股息",
+    "category": "ETF",
+    "currency": "TWD"
+  },
+  {
+    "symbol": "AAPL",
+    "name": "蘋果",
+    "category": "STOCK",
+    "currency": "USD"
+  },
+  {
+    "symbol": "MSFT",
+    "name": "微軟",
+    "category": "STOCK",
+    "currency": "USD"
+  },
+  {
+    "symbol": "GOOGL",
+    "name": "Alphabet",
+    "category": "STOCK",
+    "currency": "USD"
+  },
+  {
+    "symbol": "AMZN",
+    "name": "亞馬遜",
+    "category": "STOCK",
+    "currency": "USD"
+  },
+  {
+    "symbol": "NVDA",
+    "name": "輝達",
+    "category": "STOCK",
+    "currency": "USD"
+  },
+  {
+    "symbol": "TSLA",
+    "name": "特斯拉",
+    "category": "STOCK",
+    "currency": "USD"
+  },
+  {
+    "symbol": "META",
+    "name": "Meta",
+    "category": "STOCK",
+    "currency": "USD"
+  },
+  {
+    "symbol": "JPM",
+    "name": "摩根大通",
+    "category": "STOCK",
+    "currency": "USD"
+  },
+  {
+    "symbol": "SPY",
+    "name": "SPDR標普500",
+    "category": "ETF",
+    "currency": "USD"
+  },
+  {
+    "symbol": "QQQ",
+    "name": "Invesco QQQ",
+    "category": "ETF",
+    "currency": "USD"
+  },
+  {
+    "symbol": "^GSPC",
+    "name": "標普500指數",
+    "category": "INDEX",
+    "currency": "USD"
+  },
+  {
+    "symbol": "^IXIC",
+    "name": "納斯達克",
+    "category": "INDEX",
+    "currency": "USD"
+  },
+  {
+    "symbol": "^DJI",
+    "name": "道瓊工業",
+    "category": "INDEX",
+    "currency": "USD"
+  },
+  {
+    "symbol": "0700.HK",
+    "name": "騰訊控股",
+    "category": "STOCK",
+    "currency": "HKD"
+  },
+  {
+    "symbol": "9988.HK",
+    "name": "阿里巴巴",
+    "category": "STOCK",
+    "currency": "HKD"
+  },
+  {
+    "symbol": "3690.HK",
+    "name": "美團",
+    "category": "STOCK",
+    "currency": "HKD"
+  },
+  {
+    "symbol": "1810.HK",
+    "name": "小米集團",
+    "category": "STOCK",
+    "currency": "HKD"
+  },
+  {
+    "symbol": "0939.HK",
+    "name": "建設銀行",
+    "category": "STOCK",
+    "currency": "HKD"
+  },
+  {
+    "symbol": "0941.HK",
+    "name": "中國移動",
+    "category": "STOCK",
+    "currency": "HKD"
+  },
+  {
+    "symbol": "^HSI",
+    "name": "恆生指數",
+    "category": "INDEX",
+    "currency": "HKD"
+  },
+  {
+    "symbol": "600519.SS",
+    "name": "貴州茅台",
+    "category": "STOCK",
+    "currency": "CNY"
+  },
+  {
+    "symbol": "000858.SZ",
+    "name": "五糧液",
+    "category": "STOCK",
+    "currency": "CNY"
+  },
+  {
+    "symbol": "601318.SS",
+    "name": "中國平安",
+    "category": "STOCK",
+    "currency": "CNY"
+  },
+  {
+    "symbol": "600036.SS",
+    "name": "招商銀行",
+    "category": "STOCK",
+    "currency": "CNY"
+  },
+  {
+    "symbol": "000333.SZ",
+    "name": "美的集團",
+    "category": "STOCK",
+    "currency": "CNY"
+  },
+  {
+    "symbol": "300750.SZ",
+    "name": "寧德時代",
+    "category": "STOCK",
+    "currency": "CNY"
+  },
+  {
+    "symbol": "000001.SS",
+    "name": "上證指數",
+    "category": "INDEX",
+    "currency": "CNY"
+  },
+  {
+    "symbol": "399001.SZ",
+    "name": "深證成指",
+    "category": "INDEX",
+    "currency": "CNY"
+  },
+  {
+    "symbol": "GC=F",
+    "name": "黃金期貨",
+    "category": "COMMODITY",
+    "currency": "USD"
+  },
+  {
+    "symbol": "CL=F",
+    "name": "原油期貨WTI",
+    "category": "COMMODITY",
+    "currency": "USD"
+  },
+  {
+    "symbol": "BZ=F",
+    "name": "布倫特原油",
+    "category": "COMMODITY",
+    "currency": "USD"
+  },
+  {
+    "symbol": "USDTWD=X",
+    "name": "美元/台幣",
+    "category": "FX",
+    "currency": "TWD"
+  },
+  {
+    "symbol": "USDCNY=X",
+    "name": "美元/人民幣",
+    "category": "FX",
+    "currency": "CNY"
+  },
+  {
+    "symbol": "USDHKD=X",
+    "name": "美元/港幣",
+    "category": "FX",
+    "currency": "HKD"
+  },
+  {
+    "symbol": "USDJPY=X",
+    "name": "美元/日圓",
+    "category": "FX",
+    "currency": "JPY"
+  },
+  {
+    "symbol": "2823.HK",
+    "name": "ISHARES A50",
+    "category": "ETF",
+    "currency": "HKD"
+  }
+]
