@@ -141,7 +141,7 @@
 
 ## 5. 達到效果
 
-- **雙擊即用**：`run.bat` 一鍵啟動，開啟原生視窗，不需瀏覽器。
+- **雙擊即用**：`yfInvestment.bat` 一鍵啟動，開啟原生視窗，不需瀏覽器。
 - **跨市場覆蓋**：台／美／港／陸＋商品＋匯率，一處看全部。
 - **多幣別統一損益**：以基準幣別（TWD／USD／CNY／HKD／JPY）換算並計算損益，持股跨市場也不會算錯。
 - **專業量化指標**：夏普、索提諾、貝塔、最大回撤、波動率、相關性矩陣、3 年 CAGR，媲美 Portfolio Visualizer 的核心功能。
@@ -156,9 +156,8 @@
 ```
 yfInvestment/
 ├── desktop_app.py          # ★ 主程式（桌面版：Flask + pywebview）
-├── app.py                  # FastHTML 網頁版（歷史版本，透過 run.py 啟動）
-├── run.py                  # 啟動 FastHTML 版（http://127.0.0.1:9000）
-├── run.bat                 # 一鍵啟動桌面版（python desktop_app.py）
+├── app.py                  # FastHTML 網頁版（歷史版本）
+├── yfInvestment.bat        # 一鍵啟動桌面版（python desktop_app.py）
 ├── config.yaml             # 應用配置（主題／手續費／匯率／匯出等）
 ├── custom_symbols.json     # 使用者自訂標的
 ├── Indexing.json           # 標的索引（代碼搜尋用）
@@ -231,9 +230,7 @@ pip install flask pywebview
 
 ### 7.5 啟動應用
 
-**方式 A：桌面版（建議）**
-
-- 雙擊 `run.bat`，或在命令列執行：
+雙擊 `yfInvestment.bat`，或在命令列執行：
 
 ```bash
 python desktop_app.py
@@ -245,19 +242,7 @@ python desktop_app.py
 http://127.0.0.1:8765
 ```
 
-**方式 B：FastHTML 網頁版（歷史版本）**
-
-```bash
-python run.py
-```
-
-接著以瀏覽器訪問：
-
-```
-http://127.0.0.1:9000
-```
-
-### 7.5 首次使用建議流程
+### 7.6 首次使用建議流程
 
 1. 前往 **持倉管理**，點「＋ 新增組合」，輸入名稱、選擇基準幣別與比較基準（Benchmark）。
 2. 點「＋ 新增標的」，輸入代碼（如 `2330.TW`、`AAPL`、`0700.HK`）、數量與成本價（可調整手續費／稅率）。
@@ -543,7 +528,7 @@ All data is stored locally. Portfolios are saved as JSON files, quotes and histo
 
 ## 5. Results & Effects
 
-- **Double-click to run**: `run.bat` launches a native window; no browser needed.
+- **Double-click to run**: `yfInvestment.bat` launches a native window; no browser needed.
 - **Cross-market coverage**: TW / US / HK / CN + commodities + FX in one place.
 - **Unified multi-currency P&L**: converts to the base currency (TWD/USD/CNY/HKD/JPY), so cross-market holdings are never miscounted.
 - **Professional quantitative metrics**: Sharpe, Sortino, beta, max drawdown, volatility, correlation matrix, 3-year CAGR — comparable to Portfolio Visualizer's core.
@@ -558,9 +543,8 @@ All data is stored locally. Portfolios are saved as JSON files, quotes and histo
 ```
 yfInvestment/
 ├── desktop_app.py          # ★ Main program (Desktop: Flask + pywebview)
-├── app.py                  # FastHTML web version (legacy, launched via run.py)
-├── run.py                  # Launches the FastHTML version (http://127.0.0.1:9000)
-├── run.bat                 # One-click launch of the desktop version
+├── app.py                  # FastHTML web version (legacy)
+├── yfInvestment.bat        # One-click launch of the desktop version
 ├── config.yaml             # App config (theme / fees / FX / export, etc.)
 ├── custom_symbols.json     # User-defined instruments
 ├── Indexing.json           # Instrument index (for symbol search)
@@ -633,9 +617,7 @@ On first run the program creates the required directories automatically:
 
 ### 7.5 Launch
 
-**Option A: Desktop version (recommended)**
-
-Double-click `run.bat`, or run in a terminal:
+Double-click `yfInvestment.bat`, or run in a terminal:
 
 ```bash
 python desktop_app.py
@@ -647,19 +629,7 @@ A **native desktop window** opens automatically — no browser needed. If the wi
 http://127.0.0.1:8765
 ```
 
-**Option B: FastHTML web version (legacy)**
-
-```bash
-python run.py
-```
-
-Then open a browser at:
-
-```
-http://127.0.0.1:9000
-```
-
-### 7.5 Recommended First-Run Flow
+### 7.6 Recommended First-Run Flow
 
 1. Go to **Portfolio**, click "+ New Portfolio", enter a name, choose the base currency and benchmark.
 2. Click "+ Add Instrument", enter the code (e.g. `2330.TW`, `AAPL`, `0700.HK`), quantity and cost price (fees/tax are adjustable).
