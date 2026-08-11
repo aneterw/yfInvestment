@@ -197,12 +197,18 @@ Flask（desktop_app.py，127.0.0.1:8765）
 - Python **3.10 以上**
 - 可連線網際網路（取行情用，歷史資料有快取後可離線重看）
 
-### 7.2 安裝依賴
+### 7.2 下載專案
+
+```bash
+git clone https://github.com/aneterw/yfInvestment.git
+cd yfInvestment
+```
+
+### 7.3 安裝依賴
 
 在專案根目錄開啟命令提示字元：
 
 ```bash
-cd yfInvestment
 pip install -r requirements.txt
 ```
 
@@ -214,7 +220,7 @@ pip install flask pywebview
 
 （FastHTML 版的正確 PyPI 安裝套件名為 `python-fasthtml`，請執行 `pip install python-fasthtml`；程式碼中導入（Import）時才使用 `import fasthtml`。）
 
-### 7.3 確認資料檔
+### 7.4 確認資料檔
 
 初次執行時程式會自動建立必要目錄與檔案：
 
@@ -223,7 +229,7 @@ pip install flask pywebview
 - `data_cache/portfolios/`（自動建立，存放投資組合）
 - `Indexing.json`、`custom_symbols.json`（若有則直接使用）
 
-### 7.4 啟動應用
+### 7.5 啟動應用
 
 **方式 A：桌面版（建議）**
 
@@ -593,12 +599,18 @@ Flask (desktop_app.py, 127.0.0.1:8765)
 - Python **3.10+**
 - Internet access (for live quotes; cached history can be viewed offline)
 
-### 7.2 Install Dependencies
+### 7.2 Clone the Repository
+
+```bash
+git clone https://github.com/aneterw/yfInvestment.git
+cd yfInvestment
+```
+
+### 7.3 Install Dependencies
 
 Open a terminal in the project root:
 
 ```bash
-cd yfInvestment
 pip install -r requirements.txt
 ```
 
@@ -610,7 +622,7 @@ pip install flask pywebview
 
 (The correct PyPI package name for the FastHTML version is `python-fasthtml` — run `pip install python-fasthtml`; use `import fasthtml` only in Python code.)
 
-### 7.3 Verify Data Files
+### 7.4 Verify Data Files
 
 On first run the program creates the required directories automatically:
 
@@ -619,7 +631,7 @@ On first run the program creates the required directories automatically:
 - `data_cache/portfolios/` (auto-created, stores portfolios)
 - `Indexing.json`, `custom_symbols.json` (used as-is if present)
 
-### 7.4 Launch
+### 7.5 Launch
 
 **Option A: Desktop version (recommended)**
 
