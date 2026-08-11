@@ -156,7 +156,6 @@
 ```
 yfInvestment/
 ├── desktop_app.py          # ★ 主程式（桌面版：Flask + pywebview）
-├── app.py                  # FastHTML 網頁版（歷史版本）
 ├── yfInvestment.bat        # 一鍵啟動桌面版（python desktop_app.py）
 ├── config.yaml             # 應用配置（主題／手續費／匯率／匯出等）
 ├── custom_symbols.json     # 使用者自訂標的
@@ -543,7 +542,6 @@ All data is stored locally. Portfolios are saved as JSON files, quotes and histo
 ```
 yfInvestment/
 ├── desktop_app.py          # ★ Main program (Desktop: Flask + pywebview)
-├── app.py                  # FastHTML web version (legacy)
 ├── yfInvestment.bat        # One-click launch of the desktop version
 ├── config.yaml             # App config (theme / fees / FX / export, etc.)
 ├── custom_symbols.json     # User-defined instruments
