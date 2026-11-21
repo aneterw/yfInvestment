@@ -1056,6 +1056,14 @@ def build_performance_range(portfolio: Dict, period: str = "6m", start_date: str
 
         bench_fwd = fwd_fill(bench_closes)
 
+        # 剔除尾部 NaN（Yahoo Finance 當日未結算導致 close=NaN）
+        import math as _math
+        while value_series and (_math.isnan(value_series[-1]) or not _math.isfinite(value_series[-1])):
+            value_series.pop()
+            dates.pop()
+            if bench_fwd:
+                bench_fwd.pop()
+
         # 找出組合與 benchmark 皆有值的起點
         start_idx = 0
         while start_idx < len(value_series):
@@ -1356,6 +1364,8 @@ def build_portfolio_dashboard(pf: Dict) -> Optional[dict]:
         # ---- 月度報酬（近12個月，絕對報酬率） ----
         month_last, month_first = {}, {}
         for d, v in zip(dates, value_series):
+            if _math.isnan(v) or not _math.isfinite(v):
+                continue
             m = d[:7]
             if m not in month_first:
                 month_first[m] = v
@@ -1376,7 +1386,11 @@ def build_portfolio_dashboard(pf: Dict) -> Optional[dict]:
         # ---- 年度報酬（近3年）+ 三年 CAGR ----
         year_last, year_first = {}, {}
         for d, v in zip(dates, value_series):
+<<<<<<< HEAD
             if _math.isnan(v) or not _math.isfinite(v):
+=======
+            if __import__('math').isnan(v) or not __import__('math').isfinite(v):
+>>>>>>> e3193bb (fix: filter trailing NaN from Yahoo Finance daily data)
                 continue
             y = d[:4]
             if y not in year_first:
