@@ -2429,31 +2429,6 @@ DASHBOARD_JS = r"""
 const DASH_COLORS = ['#f87171','#34d399','#60a5fa','#fbbf24','#c084fc','#22d3ee','#fb923c','#a3e635','#f472b6','#818cf8'];
 function clsRatio(v){ return (v===null||v===undefined||isNaN(v)) ? '' : (v>=1 ? 'up' : 'down'); }
 
-async function loadDashboard(){
-  const body = document.getElementById('dash-body');
-  if (!body) return;
-  if (!activePF){ body.innerHTML = '<div class="empty-state"><div class="icon">📊</div><p>尚無投資組合</p></div>'; return; }
-  body.innerHTML = '<div class="empty-state"><div class="icon">📊</div><p>載入中...</p></div>';
-  let data = null;
-  // ?refresh=1 跳過瀏覽器與伺服器快取
-  const url = '/api/dashboard/' + activePF + '?refresh=1';
-  try { const res = await fetch(url, {cache: 'no-store'}); data = await res.json(); } catch(e){}
-  if (!data || !data.success){
-    body.innerHTML = '<div class="empty-state"><div class="icon">⚠️</div><p>無足夠數據計算投資組合可視圖</p></div>';
-    return;
-  }
-  body.innerHTML = allocSection(data) + perfSection(data) + riskSection(data);
-  drawDonut('dash-donut-cat', data.allocation.category);
-  drawDonut('dash-donut-reg', data.allocation.region);
-  drawDonut('dash-donut-ind', data.allocation.industry || []);
-  drawDonut('dash-donut-top', (data.allocation.top||[]).map(t=>({name:t.symbol, sub:t.name, pct:t.weight})));
-  drawEquity('dash-equity', data.performance);
-  drawBars('dash-monthly', data.performance.monthly, true);
-  drawBars('dash-annual', data.performance.annual, false);
-  drawRiskCards('dash-risk', data.risk);
-  drawCorr('dash-corr', data.risk.correlation);
-}
-
 function allocSection(d){
   return `<div class="dash-grid">
     <div class="dash-box"><div class="dash-title">資產類別配置</div><div id="dash-donut-cat" class="dash-canvas"></div></div>
@@ -3948,6 +3923,31 @@ tr:hover td {{ background: var(--bg3); }}
       loadPortfolioList();
       if (activePF) {{ loadPortfolio(activePF); loadOverview(); }}
     }});
+
+    async function loadDashboard(){{
+      const body = document.getElementById('dash-body');
+      if (!body) return;
+      if (!activePF){{ body.innerHTML = '<div class="empty-state"><div class="icon">📊</div><p>尚無投資組合</p></div>'; return; }}
+      body.innerHTML = '<div class="empty-state"><div class="icon">📊</div><p>載入中...</p></div>';
+      let data = null;
+      // ?refresh=1 跳過瀏覽器與伺服器快取
+      const url = '/api/dashboard/' + activePF + '?refresh=1';
+      try {{ const res = await fetch(url, {{cache: 'no-store'}}); data = await res.json(); }} catch(e){{}}
+      if (!data || !data.success){{
+        body.innerHTML = '<div class="empty-state"><div class="icon">⚠️</div><p>無足夠數據計算投資組合可視圖</p></div>';
+        return;
+      }}
+      body.innerHTML = allocSection(data) + perfSection(data) + riskSection(data);
+      drawDonut('dash-donut-cat', data.allocation.category);
+      drawDonut('dash-donut-reg', data.allocation.region);
+      drawDonut('dash-donut-ind', data.allocation.industry || []);
+      drawDonut('dash-donut-top', (data.allocation.top||[]).map(t=>({name:t.symbol, sub:t.name, pct:t.weight})));
+      drawEquity('dash-equity', data.performance);
+      drawBars('dash-monthly', data.performance.monthly, true);
+      drawBars('dash-annual', data.performance.annual, false);
+      drawRiskCards('dash-risk', data.risk);
+      drawCorr('dash-corr', data.risk.correlation);
+    }}
     </script>
     {DASHBOARD_JS}
     """
