@@ -1187,6 +1187,7 @@ def _dash_ret_stats(returns: np.ndarray) -> dict:
 def build_portfolio_dashboard(pf: Dict) -> Optional[dict]:
     """建立投資組合可視圖資料：資產配置、績效曲線、定期報酬、風險指標、相關性矩陣"""
     try:
+        import math as _math  # for NaN/finite checks on value series
         pid = pf.get("id", "pf")
         base_currency = pf.get("base_currency", "TWD")
         benchmark = pf.get("benchmark", "^TWII")
@@ -1272,6 +1273,13 @@ def build_portfolio_dashboard(pf: Dict) -> Optional[dict]:
         dates = dates[start_idx:]
         value_series = value_series[start_idx:]
         bench_fwd = bench_fwd[start_idx:]
+        # 剔除尾部 NaN（Yahoo Finance 今日未結算導致最後一筆為 NaN）
+        while value_series and (_math.isnan(value_series[-1]) or not _math.isfinite(value_series[-1])):
+            value_series.pop()
+            dates.pop()
+        while bench_fwd and (bench_fwd[-1] is None or _math.isnan(bench_fwd[-1]) or not _math.isfinite(bench_fwd[-1])):
+            bench_fwd.pop()
+            dates.pop()
         if len(dates) < 2:
             return None
 
@@ -1386,11 +1394,7 @@ def build_portfolio_dashboard(pf: Dict) -> Optional[dict]:
         # ---- 年度報酬（近3年）+ 三年 CAGR ----
         year_last, year_first = {}, {}
         for d, v in zip(dates, value_series):
-<<<<<<< HEAD
             if _math.isnan(v) or not _math.isfinite(v):
-=======
-            if __import__('math').isnan(v) or not __import__('math').isfinite(v):
->>>>>>> e3193bb (fix: filter trailing NaN from Yahoo Finance daily data)
                 continue
             y = d[:4]
             if y not in year_first:
@@ -1410,7 +1414,9 @@ def build_portfolio_dashboard(pf: Dict) -> Optional[dict]:
             w_dates = [d for d in dates if d >= anchor]
             if w_dates:
                 wv = value_series[len(dates) - len(w_dates)]
-                cagr_3y = _annualize_ret((value_series[-1] / wv - 1) * 100, len(w_dates))
+                ret_val = (value_series[-1] / wv - 1) * 100 if wv else None
+                if ret_val is not None and math.isfinite(ret_val):
+                    cagr_3y = _annualize_ret(ret_val, len(w_dates))
         except Exception:
             cagr_3y = None
 
@@ -1428,6 +1434,9 @@ def build_portfolio_dashboard(pf: Dict) -> Optional[dict]:
         bm_ret_all = dret(bench_fwd)
         mlen = min(len(pf_ret_all), len(bm_ret_all))
         pr, br = pf_ret_all[-mlen:], bm_ret_all[-mlen:]
+        # 清除返回數列中的 NaN（避免 np.std/cov 傳回 NaN）
+        valid = ~(np.isnan(pr) | np.isnan(br))
+        pr, br = pr[valid], br[valid]
 
         def _beta(r_pf, r_bm):
             if len(r_pf) < 20 or len(r_bm) < 20:
