@@ -2318,6 +2318,9 @@ def api_dashboard(pid: str):
     pf = load_portfolio(pid)
     if not pf:
         return jsonify({"success": False, "error": _t("組合不存在")}), 404
+    # ?refresh=1 強制清除快取並重新計算，用於「重新載入」按鈕
+    if request.args.get('refresh') == '1' and pid in _DASHBOARD_CACHE:
+        del _DASHBOARD_CACHE[pid]
     data = build_portfolio_dashboard(pf)
     if not data:
         return jsonify({"success": False, "error": _t("無足夠數據計算投資組合可視圖")})
@@ -2432,7 +2435,9 @@ async function loadDashboard(){
   if (!activePF){ body.innerHTML = '<div class="empty-state"><div class="icon">📊</div><p>尚無投資組合</p></div>'; return; }
   body.innerHTML = '<div class="empty-state"><div class="icon">📊</div><p>載入中...</p></div>';
   let data = null;
-  try { const res = await fetch('/api/dashboard/' + activePF); data = await res.json(); } catch(e){}
+  // ?refresh=1 跳過瀏覽器與伺服器快取
+  const url = '/api/dashboard/' + activePF + '?refresh=1';
+  try { const res = await fetch(url, {cache: 'no-store'}); data = await res.json(); } catch(e){}
   if (!data || !data.success){
     body.innerHTML = '<div class="empty-state"><div class="icon">⚠️</div><p>無足夠數據計算投資組合可視圖</p></div>';
     return;
