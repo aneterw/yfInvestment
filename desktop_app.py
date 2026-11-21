@@ -2778,7 +2778,7 @@ tr:hover td {{ background: var(--bg3); }}
           </div>
         </div>
         <div class="card fade-in" id="dashboard-card">
-          <div class="card-header"><span class="card-title">📊 投資組合可視圖</span></div>
+          <div class="card-header"><span class="card-title">📊 投資組合可視圖</span><button class="btn btn-sm" onclick="loadDashboard()">🔄 重新載入</button></div>
           <div id="dash-body"></div>
         </div>
       </div>
