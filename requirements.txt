@@ -1,5 +1,6 @@
+# fasthml removed — unused by desktop_app.py (was legacy from FastHTML version)
 # FastHML 桌面應用框架
-fasthml>=0.1.0
+# fasthml>=0.1.0
 
 # 金融數據獲取
 yfinance>=0.2.40

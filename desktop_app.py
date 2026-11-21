@@ -1067,6 +1067,13 @@ def build_performance_range(portfolio: Dict, period: str = "6m", start_date: str
         dates = dates[start_idx:]
         value_series = value_series[start_idx:]
         bench_fwd = bench_fwd[start_idx:]
+
+        # 剔除尾部 NaN（Yahoo Finance 當日未結算導致 close=NaN）
+        import math as _math
+        while value_series and (_math.isnan(value_series[-1]) or not _math.isfinite(value_series[-1])):
+            value_series.pop()
+            dates.pop()
+            bench_fwd.pop()
         if len(dates) < 2:
             return {"success": False, "error": "區間內數據不足"}
 
@@ -1333,8 +1340,16 @@ def build_portfolio_dashboard(pf: Dict) -> Optional[dict]:
         seg1 = slice(max(len(dates) - n1, 0), len(dates))
         d1, v1, b1 = dates[seg1], value_series[seg1], bench_fwd[seg1]
         base_v1, base_b1 = v1[0], b1[0]
-        p1 = [(v / base_v1 - 1) * 100 for v in v1]
-        bm1 = [(v / base_b1 - 1) * 100 for v in b1]
+        p1_raw = [(v / base_v1 - 1) * 100 for v in v1]
+        bm1_raw = [(v / base_b1 - 1) * 100 for v in b1]
+        # 剔除目前日（Yahoo Finance 尚未結算，close=NaN 使最後一筆為 NaN）
+        import math as _math
+        def strip_trailing_nan(seq):
+            while seq and (_math.isnan(seq[-1]) or not _math.isfinite(seq[-1])):
+                seq.pop()
+            return seq
+        p1 = strip_trailing_nan(p1_raw[:])
+        bm1 = strip_trailing_nan(bm1_raw[:])
         ret_1y = p1[-1] if p1 else 0.0
         ret_bm_1y = bm1[-1] if bm1 else 0.0
 
@@ -1344,6 +1359,8 @@ def build_portfolio_dashboard(pf: Dict) -> Optional[dict]:
             m = d[:7]
             if m not in month_first:
                 month_first[m] = v
+            if _math.isnan(v) or not _math.isfinite(v):
+                continue
             month_last[m] = v
         month_keys = sorted(month_last)[-12:]
         monthly = []
@@ -1359,6 +1376,8 @@ def build_portfolio_dashboard(pf: Dict) -> Optional[dict]:
         # ---- 年度報酬（近3年）+ 三年 CAGR ----
         year_last, year_first = {}, {}
         for d, v in zip(dates, value_series):
+            if _math.isnan(v) or not _math.isfinite(v):
+                continue
             y = d[:4]
             if y not in year_first:
                 year_first[y] = v
@@ -1887,6 +1906,7 @@ WINDOW_WIDTH = 1550
 WINDOW_HEIGHT = 1000
 WINDOW_MIN_WIDTH = 1200
 WINDOW_MIN_HEIGHT = 800
+PORT = 9876
 
 
 @app.route('/')
@@ -2062,6 +2082,7 @@ def api_performance(pid: str):
         rng = build_performance_range(pf, period or '6m', start_date)
         result.update(rng)
     result["risk_ratios"] = compute_portfolio_risk_ratios(pf)
+    result["success"] = True
     return jsonify(result)
 
 
@@ -2262,7 +2283,7 @@ class Api:
         """呼叫 Flask endpoint 取得資料，再彈出存檔對話框寫入"""
         try:
             import urllib.request
-            url = f'http://127.0.0.1:8765/api/export/{pid}?format={fmt}'
+            url = f'http://127.0.0.1:{PORT}/api/export/{pid}?format={fmt}'
             req = urllib.request.Request(url)
             with urllib.request.urlopen(req, timeout=30) as resp:
                 data = resp.read()
@@ -3949,7 +3970,7 @@ def run_server():
     import threading
 
     def start_flask():
-        app.run(host='127.0.0.1', port=8765, debug=False, use_reloader=False)
+        app.run(host='127.0.0.1', port=PORT, debug=False, use_reloader=False)
 
     # 在背景執行 Flask
     thread = threading.Thread(target=start_flask, daemon=True)
@@ -3979,7 +4000,7 @@ def main():
     api = Api()
     window = pywebview.create_window(
         title="投資績效分析軟體 v1.0.0",
-        url="http://127.0.0.1:8765/",
+        url=f"http://127.0.0.1:{PORT}/",
         js_api=api,
         width=WINDOW_WIDTH,
         height=WINDOW_HEIGHT,
