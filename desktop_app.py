@@ -3941,7 +3941,7 @@ tr:hover td {{ background: var(--bg3); }}
       drawDonut('dash-donut-cat', data.allocation.category);
       drawDonut('dash-donut-reg', data.allocation.region);
       drawDonut('dash-donut-ind', data.allocation.industry || []);
-      drawDonut('dash-donut-top', (data.allocation.top||[]).map(t=>({name:t.symbol, sub:t.name, pct:t.weight})));
+      drawDonut('dash-donut-top', (data.allocation.top||[]).map(t=>({{name:t.symbol, sub:t.name, pct:t.weight}}))));
       drawEquity('dash-equity', data.performance);
       drawBars('dash-monthly', data.performance.monthly, true);
       drawBars('dash-annual', data.performance.annual, false);
